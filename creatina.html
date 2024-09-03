@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Creatina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .calculator-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            text-align: left;
+            width: 100%;
+        }
+
+        input, select {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        .benefits, .resources {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .benefits ul, .resources ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .benefits li, .resources li {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .resources li a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .resources li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-container">
+        <h1>Calculadora de Creatina</h1>
+        <p>Insira seu peso e altura para calcular a quantidade de creatina recomendada:</p>
+
+        <div class="input-group">
+            <label for="unitPeso">Escolha a unidade de peso:</label>
+            <select id="unitPeso">
+                <option value="kg">Quilogramas (kg)</option>
+                <option value="lb">Libras (lbs)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <input type="number" id="peso" placeholder="Seu peso" min="1">
+        </div>
+
+        <div class="input-group">
+            <label for="unitAltura">Escolha a unidade de altura:</label>
+            <select id="unitAltura">
+                <option value="m">Metros (m)</option>
+                <option value="in">Polegadas (in)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <input type="number" id="altura" placeholder="Sua altura" min="1">
+        </div>
+
+        <button id="calcularBtn">Calcular</button>
+
+        <div id="resultado" class="result"></div>
+
+        <div class="benefits">
+            <h2>Benefícios da Creatina</h2>
+            <ul>
+                <li>Aumenta a força muscular e a performance em atividades de alta intensidade.</li>
+                <li>Ajuda na recuperação muscular pós-exercício.</li>
+                <li>Promove o aumento da massa muscular magra.</li>
+                <li>Auxilia na melhora das funções cerebrais e cognitivas.</li>
+            </ul>
+        </div>
+
+        <div class="resources">
+            <h2>Materiais Sugeridos</h2>
+            <ul>
+                <li><a href="https://www.healthline.com/nutrition/10-benefits-of-creatine" target="_blank">10 Benefícios Comprovados da Creatina</a></li>
+                <li><a href="https://examine.com/supplements/creatine/" target="_blank">Guia Completo sobre a Creatina - Examine.com</a></li>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6279859/" target="_blank">Estudo Científico: Efeitos da Creatina na Saúde e Performance</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("calcularBtn").addEventListener("click", function() {
+            var peso = parseFloat(document.getElementById("peso").value);
+            var unitPeso = document.getElementById("unitPeso").value;
+            var altura = parseFloat(document.getElementById("altura").value);
+            var unitAltura = document.getElementById("unitAltura").value;
+            var resultado = document.getElementById("resultado");
+
+            if (isNaN(peso) || peso <= 0 || isNaN(altura) || altura <= 0) {
+                resultado.innerHTML = `<span style="color: red;">Por favor, insira peso e altura válidos.</span>`;
+                return;
+            }
+
+            if (unitPeso === "lb") {
+                peso = peso / 2.20462;  // Converter libras para kg
+            }
+            if (unitAltura === "in") {
+                altura = altura * 0.0254;  // Converter polegadas para metros
+            }
+
+            // Fórmula comum: 0.03g a 0.05g de creatina por kg
+            var creatinaMin = (peso * 0.03).toFixed(2);
+            var creatinaMax = (peso * 0.05).toFixed(2);
+
+            resultado.innerHTML = `
+                Com base no seu peso de ${peso.toFixed(2)} kg e altura de ${altura.toFixed(2)} m, recomenda-se consumir entre 
+                <strong>${creatinaMin}g</strong> e <strong>${creatinaMax}g</strong> de creatina por dia.
+            `;
+        });
+    </script>
+
+</body>
+</html>
