@@ -25,3 +25,12 @@ The application allows users to enter their weight and height to calculate the r
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/igormartinif94/creatine-calculator.git
+2. **Open the HTML File:**
+
+Navigate to the project directory.
+Open the index.html file in your preferred web browser.
+Use the Calculator:
+
+3. **Select the units for weight and height.**
+Enter your weight and height.
+Click the "Calculate" button to get the recommended creatine intake.
